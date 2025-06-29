@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Personal Expense Tracker</title>
+    <link rel="stylesheet" href="/css/modelstyle.css" />
+    <link rel="stylesheet" href="/css/homeStyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="body">
+    <!-- model for messages showing -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">×</span>
+        <div class="icon">
+          <i class="fas fa-check-circle success-icon"></i>
+        </div>
+        <h3>Success</h3>
+        <!-- This will be dynamically updated -->
+        <p>Message goes here</p>
+        <!-- This will be dynamically updated -->
+        <button class="btn-ok" onclick="hideModal()">OK</button>
+      </div>
+    </div>
+
+    <%-include("includes/navbar.ejs") %>
+
+    <main class="dashboard">
+      <div class="history">
+        <div class="options">
+          <form action="#" method="post">
+            <div class="filter">
+              
+              <div class="total">
+                 <label for ='total' class="option-lable">Total:</label>
+                <p id="total"><%=100000%></p>
+              </div>
+               
+                <label for="filter" class="option-lable">Apply Filter</label>
+                <select name="filter" id="filter">
+                  <option value="No Filter">No Filter</option>
+                  <option value="Filter">Filter</option>
+                </select>
+        
+              
+              <button class="btn">Get Data</button>
+            </div>
+            <div class="afterfilter">
+              <div class="selections">
+                <label for="top" class="option-lable">Top:</label>
+                <select name="top" id="top">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                  <option value="All">All</option>
+                </select>
+              </div>
+
+              <div class="selections">
+                <label for="By" class="option-lable"> By:</label>
+                <select name="orderby" id="orderby">
+                  <option value="Date">Date</option>
+                  <option value="Amount">Amount</option>
+                  <option value="Category">Category</option>
+                </select>
+              </div>
+
+              <div class="selections">
+                <label for="ASC" class="option-lable">Order</label>
+                <select name="ASC" id="ascdesc">
+                  <option value="asc">Acending</option>
+                  <option value="desc">Decending</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Merchant</th>
+                <th>PaymentMethod</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0;i<20;i++) { %>
+              <tr>
+                <td><%=i%></td>
+                <td><%=i%></td>
+                <td><%=i%></td>
+                <td><%=i%></td>
+                <td><%=i%></td>
+                <td><%=i%></td>
+                <td><%=i%></td>
+              </tr>
+
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="charts">
+        <div class="pie-chart">pie chart</div>
+        <div class="bar-chart">bar chart</div>
+      </div>
+    </main>
+    <section class="insights">
+      <p>Your Insights here</p>
+    </section>
+
+    <%-include("includes/footer.ejs") %>
+    <script src="/scripts/model.js"></script>
+  </body>
+</html>

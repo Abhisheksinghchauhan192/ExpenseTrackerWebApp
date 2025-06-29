@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Get Your News</title>
+    <link rel="stylesheet" href="/css/loginStyle.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/modelstyle.css">
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <a href="/">Home</a>
+      </nav>
+    </header>
+    <div class="background"></div>
+
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">×</span>
+        <div class="icon">
+          <i class="fas fa-check-circle success-icon"></i>
+        </div>
+        <h3>Success</h3>
+        <!-- This will be dynamically updated -->
+        <p>Message goes here</p>
+        <!-- This will be dynamically updated -->
+        <button class="btn-ok" onclick="hideModal()">OK</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        <h1>
+          <i class="fa-regular fa-newspaper"></i>
+          Your Personal Expense Tracker
+        </h1>
+        <div class="intro">
+          <h2>Welcome! <span> To My Project Expense Tracker </span></h2>
+          <p>
+            This is my Project for Managing my own Expense with the help of
+            Technology and Making Smart decisions Based on the Data
+          </p>
+        </div>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/abhisheksinghchauhan786/"
+            ><i class="fa-brands fa-linkedin"></i> </a
+          ><a href="https://github.com/Abhisheksinghchauhan192"
+            ><i class="fa-brands fa-github"></i> </a
+          ><a href="#"><i class="fa-solid fa-laptop"></i></a>
+        </div>
+      </div>
+      <div class="logreg-box">
+        <div class="form-box login">
+          <form action="/login" method="post">
+            <h2>Sign In</h2>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" id="email" name="email" required />
+              <label for="email">Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" id="pass" name="password" required />
+              <label for="pass">Password</label>
+            </div>
+
+            <div class="remember-forgot">
+              <label
+                ><input type="checkbox" name="forgotpassword" />Remember
+                me</label
+              >
+              <a href="#">Forgot Password </a>
+            </div>
+
+            <button type="submit">Sign In</button>
+            <div class="login-register">
+              <p>
+                Doesn't have an account
+                <a href="#" class="register-link">Sign up</a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-box register">
+          <form action="/signup" method="post">
+            <h2>Sign Up</h2>
+
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-user"></i></span>
+              <input type="text" id="name" name="name" required />
+              <label for="name">Name</label>
+            </div>
+
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" id="regemail" name="email" required />
+              <label for="regemail">Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" id="pass2" name="password" required />
+              <label for="pass2">Password</label>
+            </div>
+
+            <div class="remember-forgot">
+              <label
+                ><input type="checkbox" required />I agree to terms and
+                conditions.</label
+              >
+              <a href="#">t&c</a>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <div class="login-register">
+              <p>
+                Do have an account
+                <a href="#" class="login-link">Sign In</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/scripts/logsign.js"></script>
+    <script src="/scripts/model.js"></script>
+  </body>
+</html>
