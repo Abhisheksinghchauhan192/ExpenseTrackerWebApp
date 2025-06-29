@@ -75,7 +75,7 @@ app.post("/login", (req, res) => {
 app.get("/home",(req,res)=>{
 
     // logic to get the data from the database... 
-    
+    // let me figure out the steps.. 
     res.render("home.ejs");
 })
 
