@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'missingFields':"Fill all fields !",
         'invalidEmail':"Invalid Email",
         'databaseError':"Try Again Database issue",
-        'emailExists':"User Already Exists"
+        'emailExists':"User Already Exists",
+        'unauthorized':"You Are Not Authorised To Access The Resources "
     };
     
     if (action) {

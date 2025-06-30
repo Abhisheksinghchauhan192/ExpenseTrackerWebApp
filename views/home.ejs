@@ -34,21 +34,15 @@
     <main class="dashboard">
       <div class="history">
         <div class="options">
-          <form action="#" method="post">
+          <form action="/home/gettable" method="post">
             <div class="filter">
-              
-              <div class="total">
-                 <label for ='total' class="option-lable">Total:</label>
-                <p id="total"><%=100000%></p>
-              </div>
-               
-                <label for="filter" class="option-lable">Apply Filter</label>
-                <select name="filter" id="filter">
-                  <option value="No Filter">No Filter</option>
-                  <option value="Filter">Filter</option>
-                </select>
-        
-              
+              <a  href="/home/add" id="add-btn">ADD</a>
+              <label for="filter" class="option-lable">Apply Filter</label>
+              <select name="filter" id="filter">
+                <option value="No Filter">No Filter</option>
+                <option value="Filter">Filter</option>
+              </select>
+
               <button class="btn">Get Data</button>
             </div>
             <div class="afterfilter">
@@ -118,8 +112,52 @@
         </div>
       </div>
       <div class="charts">
-        <div class="pie-chart">pie chart</div>
-        <div class="bar-chart">bar chart</div>
+        <div id="total-exp">
+          <h2>Total:<%=total%></h2>
+        </div>
+
+        <h3>Category Wise Chart :</h3>
+        <div class="pie-chart">
+          <canvas id="cat-chart"></canvas>
+        </div>
+
+        <div class="monthly">
+          <h3>Monthly Spend :</h3>
+          <form action="/getmonthly" method="post" class="selectmonth">
+            <label for="mmonth" class="option-lable">Month:</label>
+            <div class="qlabel">
+              <select name="mmonth" id="monthq ">
+                <option value="Jan">January</option>
+                <option value="Feb">February</option>
+                <option value="Mar">March</option>
+                <option value="Apr">April</option>
+                <option value="May">May</option>
+                <option value="Jun">June</option>
+                <option value="Jul">July</option>
+                <option value="Au">Auguast</option>
+                <option value="Sep">September</option>
+                <option value="Oct">October</option>
+                <option value="Nov">November</option>
+                <option value="Dec">December</option>
+              </select>
+            </div>
+
+            <label for="myear" class="option-lable">Year:</label>
+            <div class="qlabel">
+              <select name="myear" id="mYear">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">Get</button>
+          </form>
+
+          <div class="bar-chart">
+            <canvas class="bar-chart"></canvas>
+          </div>
+        </div>
       </div>
     </main>
     <section class="insights">
@@ -128,5 +166,13 @@
 
     <%-include("includes/footer.ejs") %>
     <script src="/scripts/model.js"></script>
+    <script>
+      window.chartData = {
+        total: <%- total %>,
+        byCategory: <%- JSON.stringify(byCategory) %>
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/scripts/chartLoader.js"></script>
   </body>
 </html>
