@@ -1,47 +1,44 @@
-*{
-
-    margin:0;
+* {
+    margin: 0;
     box-sizing: border-box;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-body{
+body {
     position: relative;
     background-color: black;
 }
 
-
-.header{
-    
+.header {
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: transparent;
-    height: 20px;
+    background-color: rgb(19, 18, 37);
+    height: 60px; /* Increased height for better visibility */
     display: flex;
     align-items: center;
     padding: 1.4rem 1rem;
     z-index: 100;
+    box-shadow: 4px 1px 12px white;
 }
 
-.navbar a{
+.navbar a {
     position: relative;
     text-decoration: none;
-    color:#e4e4e4;
+    color: #e4e4e4;
     font-weight: 500;
     margin-right: 2rem;
     font-size: 1.5rem;
 }
 
-.navbar a::after{
-    
+.navbar a::after {
     content: '';
     position: absolute;
-    left:0;
-    bottom:-10px;
-    width:100%;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
     height: 2px;
     background-color: #e4e4e4;
     border-radius: 5px;
@@ -50,220 +47,218 @@ body{
     transition: .5s;
 }
 
-.navbar a:hover::after{
+.navbar a:hover::after {
     transform: translateY(0);
     opacity: 1;
 }
 
-.background{
+.background {
     width: 100%;
     height: 100vh;
-    background-image: url("./assests/images/mainBackground.jpg");
+    background-image: url("/assests/images/loginbackground.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     filter: blur(10px);
 }
 
-.container{
-
+.container {
     position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    width: 75%;
-    height: 550px;
-    background-image:url("./assests/images/mainBackground.jpg");
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    background-image: url("./assests/images/mainBackground.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;   
+    background-position: center;
     margin-top: 40px;
     border-radius: 20px;
-
+    display: flex; /* Added to make content and forms side by side */
+    padding: 30px; /* Added padding for breathing space */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for better visibility */
 }
 
-.container .content{
-    position: absolute;
-    top:0;
-    left:0;
-    width: 58%;
-    height: 100%;
+.container .content {
+    flex: 1; /* Allow content to take available space */
     background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 80px;
-    color:#e4e4d4;
+    justify-content: center; /* Center content vertically */
+    padding: 40px;
+    color: #e4e4d4;
 }
-.container .content h1{
-    font-size: 40px;
+
+.container .content i {
+    font-size: 2.5rem;
 }
-.container .content .intro h2{
-    font-size: 30px;
+#typewriter{
+    height: 103px;
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom:2rem;
 }
-.container .content .intro p{
-    font-size:20px;
-    margin:20px 0;
+.container .content .intro h2 {
+    font-size: 2rem;
+}
+
+.container .content .intro p {
+    font-size: 1.2rem;
+    margin: 20px 0;
     line-height: 2;
 }
 
-.container .social-icons  a i{
+.container .social-icons a i {
     font-size: 22px;
     margin-right: 20px;
     color: #e4e4e4;
     transition: .5s ease;
 }
 
-.container .social-icons  a:hover i{
+.container .social-icons a:hover i {
     transform: scale(1.3);
 }
 
-.container .logreg-box{
-    position: absolute;
-    top:0;
-    right:0;
-    width: 42%;
-    height: 100%;
-    overflow: hidden;
+.container .logreg-box {
+    flex: 1; /* Allow forms to take available space */
+    display: flex;
+    flex-direction: column; /* Stack forms vertically */
 }
 
-.logreg-box .form-box{
-    position: absolute;
+.logreg-box .form-box {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: auto;
+    font-size: 1rem;
     background: transparent;
     backdrop-filter: blur(20px);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    color:#e4e4e4;
+    border-radius: 20px;
+    color: #e4e4e4;
+    padding: 20px;
 }
 
-
-
-.logreg-box .form-box.login{
-    transform: translateX(0);
-    transition:transform 1.2s ease;
-    transition-delay: 0.7s;
-}
-
-.logreg-box.active .form-box.login{
-    transform: translateX(1000px);
-    transition-delay: 0s;
-}
-
-.logreg-box .form-box.register{
-    transform: translateX(1000px);
-    transition: transform 0.9s ease;
-}
-
-.logreg-box.active .form-box.register{
-    transform: translateX(0);
-    transition-delay: 0.7s;
-}
-
-
-.logreg-box .form-box h2{
-    font-size: 22px;
+.logreg-box .form-box h2 {
+    font-size: 2rem;
     text-align: center;
 }
 
-.logreg-box .input-box{
+.logreg-box .input-box {
     position: relative;
-    width: 340px;
+    width: 100%;
+    max-width: 340px;
     height: 50px;
     border-bottom: 2px solid #e4e4e4;
     margin: 30px 0;
 }
 
-.logreg-box  .input-box input{
-
+.logreg-box .input-box input {
     width: 100%;
     height: 100%;
-    background:transparent;
+    background: transparent;
     border: none;
     outline: none;
     padding-right: 40px;
-    color:#e4e4e4;
+    color: #e4e4e4;
     font-size: 1rem;
-
 }
 
-.input-box label{
-
+.input-box label {
     position: absolute;
-    left:0;
-    top:50%;
+    left: 0;
+    top: 50%;
     transform: translateY(-50%);
     font-size: 19px;
     font-weight: 500;
     transition: .5s ease;
-    /* pointer-events: none; */
-
 }
 
-.logreg-box input:focus~label,
-.logreg-box input:valid~label { /* This is the correct and complete rule */
+.logreg-box input:focus ~ label,
+.logreg-box input:valid ~ label {
     top: -5px;
 }
 
-.logreg-box .icon{
+.logreg-box .icon {
     position: absolute;
-    right:0;
-    top:30%;
+    right: 0;
+    top: 30%;
 }
 
-.form-box .remember-forgot{
+.form-box .remember-forgot {
     display: flex;
     justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px 0 ;
+    font-size: 0.8em;
+    margin: -15px 0 15px 0;
 }
 
-.remember-forgot label input{
-    accent-color:#e4e4e4;
+.remember-forgot label input {
+    accent-color: #e4e4e4;
     margin-right: 14px;
 }
 
-.remember-forgot a{
+.remember-forgot a {
     text-decoration: none;
-    color:#e4e4e4;
+    color: #e4e4e4;
 }
 
-.remember-forgot a:hover{
+.remember-forgot a:hover {
     text-decoration: underline;
 }
 
-.form-box button{
-
+.form-box button {
     height: 50px;
     width: 100%;
     background-color: #c4103d;
-    border:none;
+    border: none;
     outline: none;
-    font-size: 1rem;
-    color:#e4e4e4;
+    font-size: 1.5rem;
+    color: #e4e4e4;
     font-weight: 500;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgb(0, 0, 0,0.5);
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.5);
 }
 
-.form-box .login-register p{
-    font-size: 14.5px;
+.form-box .login-register p {
+    font-size: 1rem;
     margin-top: 20px;
     text-align: center;
 }
 
-.form-box .login-register p a{
+.form-box .login-register p a {
     text-decoration: none;
-    color:#e4e4e4;
+    color: #e4e4e4;
 }
 
 .form-box .login-register p a:hover {
     text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack content and forms vertically on smaller screens */
+        width: 95%;
+        height: auto;
+    }
+
+    .container .content h1 {
+        font-size: 2rem;
+    }
+
+    .container .content .intro h2 {
+        font-size: 1.5rem;
+    }
+
+    .container .content .intro p {
+        font-size: 1rem;
+    }
+
+    .logreg-box .input-box {
+        width: 90%;
+    }
+}

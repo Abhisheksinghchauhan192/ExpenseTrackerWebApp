@@ -1,0 +1,93 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrollbar caused by minor overflows */
+}
+
+.body{
+    background-color: rgb(11, 11, 11);
+    font-family: 'Roboto', sans-serif;
+    padding-top: 70px; /* This is the height of your fixed header */
+    min-height: 100%; /* Ensures body stretches to at least the viewport height */
+    display: flex; /* Use flexbox to stack main content and footer */
+    flex-direction: column;
+}
+
+
+.header{
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: rgb(0, 0, 0,1);
+    color:rgb(219, 214, 214);
+    box-shadow: 2px 2px 14px rgb(255,255,255,0.5);
+    z-index: 1000;
+}
+
+.header .logo{
+
+    font-size: 2rem;
+    font-weight: 600;
+    color:blue;
+}
+.header .logo span{
+    color: blueviolet;
+}
+
+.header .links{
+    display: flex;
+    gap: 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.header .links a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color:rgb(33, 100, 245);
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition:transform 0.2s ease-in-out;
+}
+.header .links a:hover{
+    color: aquamarine;
+    transform:translateY(-3px);
+}
+
+.primary-btn{
+    background-color: rgb(85, 111, 187);
+    color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin: 1rem 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border:none;
+    box-shadow: 4px 3px 8px grey;
+    transition: transform 0.2s ease-in-out;
+}
+
+.primary-btn a{
+    text-decoration: none;
+    color:black;
+}
+
+.primary-btn:hover{
+    transform: translateY(-2px);
+    background-color: rgb(40, 84, 216);
+}
+

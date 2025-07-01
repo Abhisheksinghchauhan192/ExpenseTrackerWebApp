@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/add.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/modelstyle.css" />
+  </head>
+  <body>
+    <%-include("includes/header.ejs"); %>
+
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">×</span>
+        <div class="icon">
+          <i class="fas fa-check-circle success-icon"></i>
+        </div>
+        <h3>Success</h3>
+        <p>Message goes here</p>
+        <button class="btn-ok" onclick="hideModal()">OK</button>
+      </div>
+    </div>
+
+    <main class="main">
+      <a href="/home" class="back" title="Go Back"
+        ><i class="fa-solid fa-right-from-bracket"></i
+      ></a>
+      <h1>Add Your New Expense</h1>
+
+      <form action="#" method="post" class="form">
+        <div class="items">
+          <label for="Date">Date:</label>
+          <input type="date" name="Date" id="date-box" />
+        </div>
+        <div class="items">
+          <label for="Amount">Amount</label>
+          <input type="text" class="input-box" name="Amount" />
+        </div>
+
+        <div class="items">
+          <label for="Category">Category :</label>
+          <select name="Category" id="category" class="selections">
+            <option value="Groceries">Groceries</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Food">Food</option>
+            <option value="Others">Others</option>
+            <option value="Book">Book</option>
+            <option value="Health">Health</option>
+            <option value="Stationary">Stationary</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Gift">Gift</option>
+            <option value="Housing">Housing</option>
+          </select>
+        </div>
+        <div class="items">
+          <label for="Merchant">Merchant</label>
+          <input type="text" class="input-box" name="Merchant" />
+        </div>
+        <div class="items">
+          <label for="paymethod">Payment Method</label>
+          <select name="paymentMethod" id="pay" class="selections">
+            <option value="CASH">CASH</option>
+            <option value="UPI">UPI</option>
+            <option value="Net Banking">Net Banking</option>
+          </select>
+        </div>
+        <div class="items">
+          <label for="Description">Description:</label>
+          <textarea
+            name="Description"
+            id="desc"
+            placeholder="Write Description of the Expense. "
+          >
+          </textarea>
+        </div>
+        <div class="items">
+          <button>ADD</button>
+        </div>
+      </form>
+    </main>
+    <%-include("includes/footer.ejs") %>
+    <script src="/scripts/model.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let dateInput = document.getElementById("date-box");
+
+        if (dateInput) {
+          // Check if the element exists
+          let today = new Date();
+          let dd = String(today.getDate()).padStart(2, "0");
+          let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+          let yyyy = today.getFullYear();
+
+          let maxDate = yyyy + "-" + mm + "-" + dd;
+          dateInput.setAttribute("max", maxDate);
+          dateInput.value = maxDate;
+        }
+
+        // ... your existing form swap and typewriter code ...
+      });
+    </script>
+  </body>
+</html>

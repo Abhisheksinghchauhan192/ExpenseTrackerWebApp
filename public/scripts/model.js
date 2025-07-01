@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'created': 'User successfully registered!',
         'updated': 'Username successfully updated!',
         'deleted': 'User successfully deleted!',
-        'loggedIn': 'User successfully logged in!'
+        'loggedIn': 'User successfully logged in!',
+        'dataAdded':'Data Successfully Added to the Database'
     };
     
     const errorMessages = {

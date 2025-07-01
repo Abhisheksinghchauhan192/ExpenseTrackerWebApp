@@ -6,12 +6,14 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10; // Number of salt rounds for hashing
 const session = require("express-session");
 
-app.use(session({
-    secret: 'verySecretKey', // Change this to something secure in production
+app.use(
+  session({
+    secret: "verySecretKey", // Change this to something secure in production
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 } // 1 hour session
-}));
+    cookie: { maxAge: 1000 * 60 * 60 }, // 1 hour session
+  })
+);
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -22,6 +24,8 @@ const connection = mysql.createConnection({
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, "/public")));
 
 app.listen(3000, () => {
@@ -34,13 +38,13 @@ app.get("/", (req, res) => {
 });
 
 // setting up the login logic..
-// definig a middle ware for route protection . 
+// definig a middle ware for route protection .
 
 function requireLogin(req, res, next) {
-    if (!req.session.user) {
-        return res.redirect("/?success=false&action=unauthorized");
-    }
-    next();
+  if (!req.session.user) {
+    return res.redirect("/?success=false&action=unauthorized");
+  }
+  next();
 }
 
 app.post("/login", (req, res) => {
@@ -52,92 +56,89 @@ app.post("/login", (req, res) => {
   }
 
   let q = "SELECT email, password FROM users WHERE email = ?";
-  connection.query(q, [email], (err, result) => {
-    if (err) {
-      console.error("Database error:", err);
-      return res.redirect("/?success=false&action=databaseError");
-    }
 
-    // Check if user exists
-    if (result.length === 0) {
-      return res.redirect("/?success=false&action=userNotExists");
-    }
-
-    const user = result[0];
-
-    // Compare the provided password with the hashed password in the database
-    bcrypt.compare(password, user.password, (err, isMatch) => {
+  try {
+    connection.query(q, [email], (err, result) => {
       if (err) {
-        console.error("Error comparing passwords:", err);
+        console.error("Database error:", err);
         return res.redirect("/?success=false&action=databaseError");
       }
 
-      if (isMatch) {
-        //  Store user session
-        req.session.user = { email: user.email };
-        return res.redirect("/home?success=true&action=loggedIn");
-      } else {
-        // Passwords do not match
-        return res.redirect("/?success=false&action=wrongPassword");
+      // Check if user exists
+      if (result.length === 0) {
+        return res.redirect("/?success=false&action=userNotExists");
       }
+
+      const user = result[0];
+
+      // Compare the provided password with the hashed password in the database
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          console.error("Error comparing passwords:", err);
+          return res.redirect("/?success=false&action=databaseError");
+        }
+
+        if (isMatch) {
+          //  Store user session
+          req.session.user = { email: user.email };
+          return res.redirect("/home?success=true&action=loggedIn");
+        } else {
+          // Passwords do not match
+          return res.redirect("/?success=false&action=wrongPassword");
+        }
+      });
     });
-  });
+  } catch (err) {
+    return res.redirect("/?success=false&action=databaseError");
+  }
 });
 
 app.get("/logout", (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            console.log("Error destroying session:", err);
-        }
-        res.redirect("/");
-    });
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("Error destroying session:", err);
+    }
+    res.redirect("/");
+  });
 });
 
-// function to get the data for the charts 
-function getTotalExpense(){
-  return new Promise((resolve,reject)=>{
-
+// function to get the data for the charts
+function getTotalExpense() {
+  return new Promise((resolve, reject) => {
     const q = `select sum(Amount) as total from expenses`;
-    connection.query(q,(err,result)=>{
-
-      if(err)reject(err);
+    connection.query(q, (err, result) => {
+      if (err) reject(err);
       resolve(result[0].total);
     });
   });
 }
 
-function getExpensesByCategory(){
-  return new Promise((resolve,reject)=>{
-
+function getExpensesByCategory() {
+  return new Promise((resolve, reject) => {
     const q = `select Category,sum(Amount) as total from expenses group by Category`;
-    connection.query(q,(err,result)=>{
-
-      if(err)reject(err);
+    connection.query(q, (err, result) => {
+      if (err) reject(err);
       resolve(result);
     });
   });
 }
 
-
-app.get("/home",requireLogin,async(req, res) => {
+app.get("/home", requireLogin, async (req, res) => {
   // logic to get the data from the database...
   // let me figure out the steps..
   let userEmail = req.session.user.email;
 
-  try{
+  try {
     let totalExpense = await getTotalExpense();
     let byCategoryResult = await getExpensesByCategory();
-    res.render("home.ejs",{
-
-      total:totalExpense || 0,
-      byCategory:byCategoryResult,
-      user:req.session.user
+    res.render("home.ejs", {
+      total: totalExpense || 0,
+      byCategory: byCategoryResult,
+      user: req.session.user,
     });
-
-  }catch(err){
+  } catch (err) {
     res.status(500).send("An error occurred while fetching your data.");
   }
-    
 });
 
 // setting up the signup logic..
@@ -177,4 +178,71 @@ app.post("/signup", async (req, res) => {
     console.error("Error in signup process:", err);
     res.redirect("/?success=false&action=error");
   }
+});
+
+// settin up the add route.
+
+app.get("/home/add", requireLogin, (req, res) => {
+  res.render("add.ejs");
+});
+
+// getting the data from tehh add route
+
+app.post("/home/add", (req, res) => {
+  // making the logic of adding the new expense in the databasee..
+
+  let q =
+    "insert into expenses(Date,Amount,Category,Merchant,paymentMethod,Description) values (?)";
+
+  let { Date, Amount, Category, Merchant, paymentMethod, Description } =
+    req.body;
+  Amount = parseFloat(Amount);
+
+  const data = [Date, Amount, Category, Merchant, paymentMethod, Description];
+
+  // making request to the database now.
+  try {
+    connection.query(q, [data], (err, result) => {
+      if (err) res.redirect("/home/add?success=false&action=databaseError");
+      res.redirect("/home/add?success=true&action=dataAdded");
+    });
+  } catch (err) {
+    console.log("error in database connection");
+    res.redirect("/home/add?success=false&action=databaseError");
+  }
+});
+
+//route for getting monthly data
+
+app.post("/home/getmonthly", (req, res) => {
+
+  // getting data from the database based on the month and year..
+  // console.log(req.body);
+
+  let q = `
+      select
+	
+	      if(grouping(Category),
+		      'Total',Category) category,
+	      sum(Amount) totalPerMonth
+      from 
+	      expenses
+    `;
+
+    let {year,month} = req.body;
+    year = parseInt(year);
+    month = parseInt(month);
+
+    q+=`where year(Date) = ${year} and month(Date) = ${month} group by category with rollup`;
+
+
+    connection.query(q,(err,results)=>{
+
+      if(err)
+          res.redirect("/home?success=true&action=databaseError");
+      // console.log(results);
+      res.json(results);
+    })    
+
+    
 });

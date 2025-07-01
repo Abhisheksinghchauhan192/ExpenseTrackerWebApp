@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Personal Expense Tracker</title>
     <link rel="stylesheet" href="/css/modelstyle.css" />
+    <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/homeStyle.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="/css/footer.css">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
   </head>
   <body class="body">
     <!-- model for messages showing -->
@@ -29,7 +34,7 @@
       </div>
     </div>
 
-    <%-include("includes/navbar.ejs") %>
+    <%-include("includes/header.ejs") %>
 
     <main class="dashboard">
       <div class="history">
@@ -113,7 +118,7 @@
       </div>
       <div class="charts">
         <div id="total-exp">
-          <h2>Total:<%=total%></h2>
+          <h2>Total: <%=total%></h2>
         </div>
 
         <h3>Category Wise Chart :</h3>
@@ -123,28 +128,28 @@
 
         <div class="monthly">
           <h3>Monthly Spend :</h3>
-          <form action="/getmonthly" method="post" class="selectmonth">
-            <label for="mmonth" class="option-lable">Month:</label>
+          <form action="/home" method="post" class="selectmonth" id="barchartform">
+            <label for="month" class="option-lable">Month:</label>
             <div class="qlabel">
-              <select name="mmonth" id="monthq ">
-                <option value="Jan">January</option>
-                <option value="Feb">February</option>
-                <option value="Mar">March</option>
-                <option value="Apr">April</option>
-                <option value="May">May</option>
-                <option value="Jun">June</option>
-                <option value="Jul">July</option>
-                <option value="Au">Auguast</option>
-                <option value="Sep">September</option>
-                <option value="Oct">October</option>
-                <option value="Nov">November</option>
-                <option value="Dec">December</option>
+              <select name="month" id="monthq ">
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">Auguast</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
               </select>
             </div>
 
-            <label for="myear" class="option-lable">Year:</label>
+            <label for="year" class="option-lable">Year:</label>
             <div class="qlabel">
-              <select name="myear" id="mYear">
+              <select name="year" id="mYear">
                 <option value="2023">2023</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -155,7 +160,8 @@
           </form>
 
           <div class="bar-chart">
-            <canvas class="bar-chart"></canvas>
+            <h2 id="total-bar"></h1>
+            <canvas id="bar-chart"></canvas>
           </div>
         </div>
       </div>
@@ -174,5 +180,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/scripts/chartLoader.js"></script>
+    <script src="/scripts/barChartLoader.js"></script>
   </body>
 </html>

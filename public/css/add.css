@@ -1,0 +1,156 @@
+body{
+ 
+    overflow-y: hidden;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    gap:4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(17, 16, 16);
+    height: 90vh;
+    width: 100%;
+}
+
+.main .back{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    top:100px;
+    right:20px;
+    color: white;
+    background-color: green;
+    width: 80px;
+    height: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.main h1{
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: wheat;
+    }
+
+.form{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1rem;
+    width: 80%;
+    height:60vh;
+    background-color: rgb(55, 55, 55);
+    border-radius: 20px;
+    box-shadow: 4px 4px 12px rgb(43, 42, 42);
+}
+
+.items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 18%;
+    /* background-color: rgb(189, 178, 178); */
+    gap:2rem;
+    transition: scale 0.3s ease-in-out;
+}
+
+.items:hover{
+    scale: 1.2;
+ }
+.items label{
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+}
+
+#date-box{
+    padding: 1rem;
+    height: 70%;
+    width: 20%;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+    background-color: rgb(143, 141, 141);
+}
+
+.items .input-box{
+    height: 90%;
+    width: 30%;
+    font-size: 1.2rem;
+    padding: 1rem;
+    font-weight: 500;
+    color:black;
+    border-radius: 10px;
+    border: 1px yellowgreen solid;
+    background-color: rgb(143, 141, 141);
+}
+
+.items .selections{
+
+    height: 100%;
+    width: 30%;
+    font-size: 1.2rem;
+    padding: 1rem;
+    font-weight: 500;
+    color:black;
+    border-radius: 10px;
+    border: 1px yellowgreen solid;
+    background-color: rgb(143, 141, 141);
+}
+
+#desc{
+    padding: 1rem;
+    height: 100%;
+    width: 30%;
+    font-size: 1.2rem;
+    color:black;
+    border-radius: 10px;
+    border: 1px yellowgreen solid;
+    outline: none;
+    background-color: rgb(143, 141, 141);
+}
+
+.items button{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgb(49, 157, 32);
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    color: rgb(255, 255, 255);
+    transition: transform 0.2s ease;
+}
+
+.items button:hover{
+    background-color: rgb(48, 132, 37);
+    transform:translateY(-2px) ;
+    box-shadow: 2px 2px 4px black;
+}
+
+/* ResponsiveNess */
+
+@media(max-width:885px){
+    
+    .header .links{
+        display: none;
+    }
+    .header .logo{
+        font-size: 1.3rem;
+    }
+}
+
