@@ -123,6 +123,46 @@ function getExpensesByCategory() {
   });
 }
 
+function getCurrentMonthData(){
+  return new Promise((resolve,reject)=>{
+    const q = `(SELECT
+    'category' AS type,
+    Category AS name,
+    SUM(Amount) AS total_spent
+FROM
+    expenses
+WHERE
+    DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')
+GROUP BY
+    Category
+ORDER BY
+    total_spent DESC
+LIMIT 3)
+
+UNION ALL
+
+(SELECT
+    'merchant' AS type,
+    Merchant AS name,
+    SUM(Amount) AS total_spent
+FROM
+    expenses
+WHERE
+    DATE_FORMAT(date, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')
+GROUP BY
+    Merchant
+ORDER BY
+    total_spent DESC
+LIMIT 3);`;
+
+    connection.query(q,(err,result)=>{
+
+      if(err)reject(err);
+      resolve(result);
+    });
+  });
+}
+
 app.get("/home", requireLogin, async (req, res) => {
   // logic to get the data from the database...
   // let me figure out the steps..
@@ -131,10 +171,24 @@ app.get("/home", requireLogin, async (req, res) => {
   try {
     let totalExpense = await getTotalExpense();
     let byCategoryResult = await getExpensesByCategory();
+    let currentData = await getCurrentMonthData();
+    // filterout the data of the current month 
+    let top3Category = [];
+    let top3Merchant = [];
+    for(let item of currentData){
+      if(item.type ==='category'){
+        top3Category.push(item);
+      }
+      else{
+        top3Merchant.push(item);
+      }
+    }
     res.render("home.ejs", {
       total: totalExpense || 0,
       byCategory: byCategoryResult,
       user: req.session.user,
+      top3cat:top3Category,
+      top3merchant:top3Merchant,
     });
   } catch (err) {
     res.status(500).send("An error occurred while fetching your data.");
@@ -188,7 +242,7 @@ app.get("/home/add", requireLogin, (req, res) => {
 
 // getting the data from tehh add route
 
-app.post("/home/add", (req, res) => {
+app.post("/home/add",requireLogin, (req, res) => {
   // making the logic of adding the new expense in the databasee..
 
   let q =
@@ -196,8 +250,15 @@ app.post("/home/add", (req, res) => {
 
   let { Date, Amount, Category, Merchant, paymentMethod, Description } =
     req.body;
-  Amount = parseFloat(Amount);
 
+
+  Amount = parseFloat(Amount);
+  //handeling invalid Amounts.... 
+  if (isNaN(Amount) || Amount < 0) {
+    return res.redirect("/home/add?success=false&action=inputError");
+  }
+
+  Merchant = Merchant.replace(/\b\w/g, char => char.toUpperCase());
   const data = [Date, Amount, Category, Merchant, paymentMethod, Description];
 
   // making request to the database now.
@@ -214,7 +275,7 @@ app.post("/home/add", (req, res) => {
 
 //route for getting monthly data
 
-app.post("/home/getmonthly", (req, res) => {
+app.post("/home/getmonthly", requireLogin,(req, res) => {
 
   // getting data from the database based on the month and year..
   // console.log(req.body);
@@ -242,7 +303,29 @@ app.post("/home/getmonthly", (req, res) => {
           res.redirect("/home?success=true&action=databaseError");
       // console.log(results);
       res.json(results);
-    })    
+    }); 
 
     
+});
+
+
+// setting the route to show the path gettingTable Data..
+app.post("/home/gettable",requireLogin,(req,res)=>{
+  
+  let q = `select * from expenses `;
+  let{filter,top,orderby} = req.body;
+  // query building logic  .. 
+  if(filter ==='Filter'){
+
+    q+= ` order by Amount ${orderby}  limit ${top}`;
+  }
+  
+  connection.query(q,(err,result)=>{
+
+      if(err)
+      return res.status(500).json({ success: false, message: "Database error while fetching expenses." });
+
+      res.json({success:true,data:result});
+  });
+
 });

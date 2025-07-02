@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'invalidEmail':"Invalid Email",
         'databaseError':"Try Again Database issue",
         'emailExists':"User Already Exists",
-        'unauthorized':"You Are Not Authorised To Access The Resources "
+        'unauthorized':"You Are Not Authorised To Access The Resources ",
+        'inputError':'Wrong Inputs Try Again.'
     };
     
     if (action) {

@@ -39,7 +39,7 @@
     <main class="dashboard">
       <div class="history">
         <div class="options">
-          <form action="/home/gettable" method="post">
+          <form action="/home/gettable" method="post" id="table-form">
             <div class="filter">
               <a  href="/home/add" id="add-btn">ADD</a>
               <label for="filter" class="option-lable">Apply Filter</label>
@@ -63,22 +63,15 @@
                   <option value="40">40</option>
                   <option value="50">50</option>
                   <option value="60">60</option>
+                  <option value="80">80</option>
+                  <option value="100">100</option>
                   <option value="All">All</option>
                 </select>
               </div>
 
               <div class="selections">
-                <label for="By" class="option-lable"> By:</label>
+                <label for="orderby" class="option-lable">Order</label>
                 <select name="orderby" id="orderby">
-                  <option value="Date">Date</option>
-                  <option value="Amount">Amount</option>
-                  <option value="Category">Category</option>
-                </select>
-              </div>
-
-              <div class="selections">
-                <label for="ASC" class="option-lable">Order</label>
-                <select name="ASC" id="ascdesc">
                   <option value="asc">Acending</option>
                   <option value="desc">Decending</option>
                 </select>
@@ -99,19 +92,7 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tbody>
-              <% for (let i = 0;i<20;i++) { %>
-              <tr>
-                <td><%=i%></td>
-                <td><%=i%></td>
-                <td><%=i%></td>
-                <td><%=i%></td>
-                <td><%=i%></td>
-                <td><%=i%></td>
-                <td><%=i%></td>
-              </tr>
-
-              <% } %>
+            <tbody id="table-body">
             </tbody>
           </table>
         </div>
@@ -131,7 +112,7 @@
           <form action="/home" method="post" class="selectmonth" id="barchartform">
             <label for="month" class="option-lable">Month:</label>
             <div class="qlabel">
-              <select name="month" id="monthq ">
+              <select name="month" id="month">
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -149,7 +130,7 @@
 
             <label for="year" class="option-lable">Year:</label>
             <div class="qlabel">
-              <select name="year" id="mYear">
+              <select name="year" id="year">
                 <option value="2023">2023</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
@@ -167,7 +148,50 @@
       </div>
     </main>
     <section class="insights">
-      <p>Your Insights here</p>
+        <h2 class="red-h2">Total : <%=total%></h2>
+        <div class="last-month">
+          <h2>Top 3 Category Where You Spent This Month</h2>
+          <div class="top3Category">
+            <table class="top3table">
+              <thead>
+                <tr>
+                  <th>Category </th>
+                  <th>Amount Spent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let item of top3cat) { %>
+                  <tr>
+                    <td><%=item.name%></td>
+                    <td><%=item.total_spent%></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="last-month">
+          <h2>Top 3 Merchants Of Current Month</h2>
+          <div class="top3Category">
+            <table class="top3table">
+              <thead>
+                <tr>
+                  <th>Merchant </th>
+                  <th>Amount Spent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let item of top3merchant) { %>
+                  <tr>
+                    <td><%=item.name%></td>
+                    <td><%=item.total_spent%></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </section>
 
     <%-include("includes/footer.ejs") %>
@@ -181,5 +205,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/scripts/chartLoader.js"></script>
     <script src="/scripts/barChartLoader.js"></script>
+    <script src="/scripts/tableLoader.js"></script>
   </body>
 </html>

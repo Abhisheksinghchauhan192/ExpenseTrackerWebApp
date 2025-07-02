@@ -29,24 +29,24 @@
     </div>
 
     <main class="main">
-      <a href="/home" class="back" title="Go Back"
+      <a href="#" onclick="history.back(); return false;" class="back" title="Go Back"
         ><i class="fa-solid fa-right-from-bracket"></i
       ></a>
       <h1>Add Your New Expense</h1>
 
-      <form action="#" method="post" class="form">
+      <form action="/home/add" method="post" class="form">
         <div class="items">
           <label for="Date">Date:</label>
-          <input type="date" name="Date" id="date-box" />
+          <input type="date" name="Date" id="date-box" required/>
         </div>
         <div class="items">
           <label for="Amount">Amount</label>
-          <input type="text" class="input-box" name="Amount" />
+          <input type="text" class="input-box" name="Amount"  required/>
         </div>
 
         <div class="items">
           <label for="Category">Category :</label>
-          <select name="Category" id="category" class="selections">
+          <select name="Category" id="category" class="selections" required>
             <option value="Groceries">Groceries</option>
             <option value="Utilities">Utilities</option>
             <option value="Food">Food</option>
@@ -62,11 +62,11 @@
         </div>
         <div class="items">
           <label for="Merchant">Merchant</label>
-          <input type="text" class="input-box" name="Merchant" />
+          <input type="text" class="input-box" name="Merchant" required />
         </div>
         <div class="items">
           <label for="paymethod">Payment Method</label>
-          <select name="paymentMethod" id="pay" class="selections">
+          <select name="paymentMethod" id="pay" class="selections" required>
             <option value="CASH">CASH</option>
             <option value="UPI">UPI</option>
             <option value="Net Banking">Net Banking</option>
@@ -78,8 +78,7 @@
             name="Description"
             id="desc"
             placeholder="Write Description of the Expense. "
-          >
-          </textarea>
+         required ></textarea>
         </div>
         <div class="items">
           <button>ADD</button>

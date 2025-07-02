@@ -8,7 +8,7 @@
     font-size: 1.2rem;
     font-weight: 400;
     background-color: rgb(54, 53, 53);
-    color:rgb(244, 239, 239)
+    color:rgb(244, 239, 239);
 
 }
 
@@ -16,3 +16,6 @@
     text-decoration: none;
     color:rgb(244, 239, 239);
 }
+
+.footer p{
+margin: 0.3rem;}

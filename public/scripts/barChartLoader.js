@@ -27,11 +27,11 @@ form.addEventListener("submit", (event) => {
       return JSON.parse(text); // Parse the text as JSON
     })
     .then((data) => {
-    //   console.log("Parsed Data:", data); // Log the parsed data
+      console.log("Parsed Data:", data); // Log the parsed data
       renderChart(data); // Call your chart rendering function
     })
     .catch((err) => {
-      console.log("error Occured Fetching DATA", err);
+      renderChart([{category:'NO DATA FOUND',totalPerMonth:0}]);
     });
 });
 
