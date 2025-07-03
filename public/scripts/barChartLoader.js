@@ -19,15 +19,10 @@ form.addEventListener("submit", (event) => {
     body: JSON.stringify({ year, month }),
   })
     .then((response) => {
-    //   console.log("Response Status:", response.status); // Log the status
-      return response.text(); // Get the response as text first
-    })
-    .then((text) => {
-    //   console.log("Response Body:", text); // Log the raw response body
-      return JSON.parse(text); // Parse the text as JSON
+      return response.json(); // Get the response as text first
     })
     .then((data) => {
-      console.log("Parsed Data:", data); // Log the parsed data
+      //console.log("Parsed Data:", data); // Log the parsed data
       renderChart(data); // Call your chart rendering function
     })
     .catch((err) => {

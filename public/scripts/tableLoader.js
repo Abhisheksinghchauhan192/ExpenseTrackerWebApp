@@ -14,7 +14,10 @@ tableForm.addEventListener("submit",(event)=>{
 
     // console.log("Table request triggered");
   
-
+     // if topp is selected as all then after parsing it will contain null so 
+    // set it to a large value to get all the vaulues of the table.
+    if(!top) top = 1000000;
+    
     fetch("/home/gettable",{
         method:"POST",
         headers:{

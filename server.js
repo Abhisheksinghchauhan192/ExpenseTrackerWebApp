@@ -123,8 +123,8 @@ function getExpensesByCategory() {
   });
 }
 
-function getCurrentMonthData(){
-  return new Promise((resolve,reject)=>{
+function getCurrentMonthData() {
+  return new Promise((resolve, reject) => {
     const q = `(SELECT
     'category' AS type,
     Category AS name,
@@ -155,9 +155,8 @@ ORDER BY
     total_spent DESC
 LIMIT 3);`;
 
-    connection.query(q,(err,result)=>{
-
-      if(err)reject(err);
+    connection.query(q, (err, result) => {
+      if (err) reject(err);
       resolve(result);
     });
   });
@@ -172,14 +171,13 @@ app.get("/home", requireLogin, async (req, res) => {
     let totalExpense = await getTotalExpense();
     let byCategoryResult = await getExpensesByCategory();
     let currentData = await getCurrentMonthData();
-    // filterout the data of the current month 
+    // filterout the data of the current month
     let top3Category = [];
     let top3Merchant = [];
-    for(let item of currentData){
-      if(item.type ==='category'){
+    for (let item of currentData) {
+      if (item.type === "category") {
         top3Category.push(item);
-      }
-      else{
+      } else {
         top3Merchant.push(item);
       }
     }
@@ -187,8 +185,8 @@ app.get("/home", requireLogin, async (req, res) => {
       total: totalExpense || 0,
       byCategory: byCategoryResult,
       user: req.session.user,
-      top3cat:top3Category,
-      top3merchant:top3Merchant,
+      top3cat: top3Category,
+      top3merchant: top3Merchant,
     });
   } catch (err) {
     res.status(500).send("An error occurred while fetching your data.");
@@ -242,7 +240,7 @@ app.get("/home/add", requireLogin, (req, res) => {
 
 // getting the data from tehh add route
 
-app.post("/home/add",requireLogin, (req, res) => {
+app.post("/home/add", requireLogin, (req, res) => {
   // making the logic of adding the new expense in the databasee..
 
   let q =
@@ -251,14 +249,13 @@ app.post("/home/add",requireLogin, (req, res) => {
   let { Date, Amount, Category, Merchant, paymentMethod, Description } =
     req.body;
 
-
   Amount = parseFloat(Amount);
-  //handeling invalid Amounts.... 
+  //handeling invalid Amounts....
   if (isNaN(Amount) || Amount < 0) {
     return res.redirect("/home/add?success=false&action=inputError");
   }
 
-  Merchant = Merchant.replace(/\b\w/g, char => char.toUpperCase());
+  Merchant = Merchant.replace(/\b\w/g, (char) => char.toUpperCase());
   const data = [Date, Amount, Category, Merchant, paymentMethod, Description];
 
   // making request to the database now.
@@ -275,8 +272,7 @@ app.post("/home/add",requireLogin, (req, res) => {
 
 //route for getting monthly data
 
-app.post("/home/getmonthly", requireLogin,(req, res) => {
-
+app.post("/home/getmonthly", requireLogin, (req, res) => {
   // getting data from the database based on the month and year..
   // console.log(req.body);
 
@@ -290,42 +286,45 @@ app.post("/home/getmonthly", requireLogin,(req, res) => {
 	      expenses
     `;
 
-    let {year,month} = req.body;
-    year = parseInt(year);
-    month = parseInt(month);
+  let { year, month } = req.body;
+  year = parseInt(year);
+  month = parseInt(month);
 
-    q+=`where year(Date) = ${year} and month(Date) = ${month} group by category with rollup`;
+  q += `where year(Date) = ? and month(Date) = ? group by category with rollup`;
 
-
-    connection.query(q,(err,results)=>{
-
-      if(err)
-          res.redirect("/home?success=true&action=databaseError");
-      // console.log(results);
-      res.json(results);
-    }); 
-
-    
+  connection.query(q, [year, month], (err, results) => {
+    if (err) res.redirect("/home?success=true&action=databaseError");
+    // console.log(results);
+    res.json(results);
+  });
 });
-
 
 // setting the route to show the path gettingTable Data..
-app.post("/home/gettable",requireLogin,(req,res)=>{
-  
+app.post("/home/gettable", requireLogin, (req, res) => {
   let q = `select * from expenses `;
-  let{filter,top,orderby} = req.body;
-  // query building logic  .. 
-  if(filter ==='Filter'){
+  let { filter, top, orderby } = req.body;
+  // query building logic  ..
+  orderby = orderby === "asc" ? "asc" : "desc";
 
-    q+= ` order by Amount ${orderby}  limit ${top}`;
+  if (filter === "Filter") {
+    q += ` order by Amount ${orderby} limit ?`;
   }
-  
-  connection.query(q,(err,result)=>{
 
-      if(err)
-      return res.status(500).json({ success: false, message: "Database error while fetching expenses." });
-
-      res.json({success:true,data:result});
+  connection.query(q, [top], (err, result) => {
+    if (err)
+      return res
+        .status(500)
+        .json({
+          success: false,
+          message: "Database error while fetching expenses.",
+        });
+    res.json({ success: true, data: result });
   });
-
 });
+
+// adding a router for the page requested which is not found then render the page not 
+// found file 
+
+app.use("/",(req,res)=>{
+  res.sendFile("pageNotFound.html", { root: "public/html" });
+})
