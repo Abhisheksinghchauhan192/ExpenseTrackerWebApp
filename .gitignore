@@ -1,0 +1,2 @@
+# ignore the node_module folder from staging.. 
+node_modules/
