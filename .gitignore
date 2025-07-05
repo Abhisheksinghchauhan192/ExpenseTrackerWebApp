@@ -1,2 +1,8 @@
 # ignore the node_module folder from staging.. 
 node_modules/
+# ignore the configuration data. 
+.env
+#ignore the log files 
+*.log
+# ignore the vs code configuration
+.vscode/
