@@ -90,30 +90,40 @@ function applyFilters() {
   loadTableData(filteredData);
 }
 
-function loadTableData(data) {
-  tablebody.innerHTML = "";
-  if (data && data.length > 0) {
-    data.forEach((rec, index) => {
-      let row = document.createElement("tr");
-      row.insertCell().textContent = index + 1;
-      row.insertCell().innerText = String(rec.Date).substring(0, 10);
-      row.insertCell().innerText = `${rec.Amount} ₹`;
-      row.insertCell().innerText = rec.Category;
-      row.insertCell().innerText = rec.Merchant;
-      row.insertCell().innerText = rec.paymentMethod;
-      row.insertCell().innerText = rec.Description;
-      tablebody.appendChild(row);
-    });
-  }
-  // if not data then print no data found in the table
-  else {
-    // 8. If no expenses are found, display a "No data" message
-    const row = document.createElement("tr");
-    const noDataCell = document.createElement("td");
-    noDataCell.textContent = "No expenses found for the selected criteria.";
-    noDataCell.colSpan = 6; // Span across all columns of your table
-    noDataCell.style.textAlign = "center"; // Center the text
-    row.appendChild(noDataCell);
-    tablebody.appendChild(row);
-  }
+function loadTableData(data){
+
+    tablebody.innerHTML = '';
+    if(data && data.length>0){
+
+        data.forEach((rec,index,data )=> {
+            let row = document.createElement('tr');
+            row.insertCell().textContent = index+1;
+	    // converting the date into dd/mm/yyyy format
+            const date = new Date(rec.Date);
+	    const day = String(date.getDate()).padStart(2, '0');
+	    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+	    const year = date.getFullYear();
+	    row.insertCell().innerText = `${day}/${month}/${year}`;
+
+            row.insertCell().innerText = `${rec.Amount} ₹`;
+            row.insertCell().innerText = rec.Category;
+            row.insertCell().innerText = rec.Merchant;
+            row.insertCell().innerText = rec.paymentMethod;
+            row.insertCell().innerText = rec.Description;
+            tablebody.appendChild(row);
+            
+        });
+
+    }
+    // if not data then print no data found in the table 
+    else{
+        // 8. If no expenses are found, display a "No data" message
+        const row = document.createElement('tr');
+        const noDataCell = document.createElement('td');
+        noDataCell.textContent = 'No expenses found for the selected criteria.';
+        noDataCell.colSpan = 6; // Span across all columns of your table
+        noDataCell.style.textAlign = 'center'; // Center the text
+        row.appendChild(noDataCell);
+        tablebody.appendChild(row);
+    }
 }
