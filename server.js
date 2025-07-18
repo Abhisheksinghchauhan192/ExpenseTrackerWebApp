@@ -2,6 +2,7 @@ const express = require("./util/express");
 const path = require("path");
 const app = express();
 const {sessionmiddleware} = require("./middleware/authmiddleware");
+require('dotenv').config();
 
 // requiring the routes.. 
 const authenticateRoute = require("./routes/authenticate");
@@ -24,9 +25,9 @@ app.use('/home/add',addRoute);
 app.use("/home",homeRoute);
 app.use("/",authenticateRoute);
 
-
-app.listen(3000, () => {
-  console.log("Expense Tracker App Engine Started");
+const Port = process.env.PORT || 3000
+app.listen(Port, () => {
+  console.log("Expense Tracker App Engine Started at PORT - ",Port);
 });
 
 // adding a router for the page requested which is not found then render the page not 
