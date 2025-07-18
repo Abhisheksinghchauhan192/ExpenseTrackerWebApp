@@ -23,7 +23,9 @@ router.post("/", requireLogin, (req, res) => {
   year = parseInt(year);
   month = parseInt(month);
 
-  q += `where year(Date) = ? and month(Date) = ? group by category with rollup`;
+  q += `WHERE YEAR(CONVERT_TZ(Date, @@session.time_zone, '+00:00')) = ? 
+        AND MONTH(CONVERT_TZ(Date, @@session.time_zone, '+00:00')) = ?
+  group by category with rollup`;
 
   connection.query(q, [year, month], (err, results) => {
     if (err) res.redirect("/home?success=false&action=databaseError");
