@@ -23,8 +23,8 @@ router.post("/", requireLogin, (req, res) => {
   year = parseInt(year);
   month = parseInt(month);
 
-  q += `WHERE YEAR(CONVERT_TZ(Date, @@session.time_zone, '+00:00')) = ? 
-        AND MONTH(CONVERT_TZ(Date, @@session.time_zone, '+00:00')) = ?
+  q += `WHERE YEAR(DATE) = ? 
+        AND MONTH(DATE) = ?
   group by category with rollup`;
 
   connection.query(q, [year, month], (err, results) => {

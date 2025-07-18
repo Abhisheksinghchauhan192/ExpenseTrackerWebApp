@@ -71,8 +71,8 @@ function applyFilters() {
 
   const filteredData = tableData.filter((exp) => {
     const expDate = new Date(exp.Date);
-    const expMonth = (expDate.getUTCMonth() + 1).toString().padStart(2, "0");
-    const expYear = expDate.getUTCFullYear().toString();
+    const expMonth = (expDate.getMonth() + 1).toString().padStart(2, "0");
+    const expYear = expDate.getFullYear().toString();
 
     // Lowercase handling to prevent mismatch due to casing
     const category = exp.Category?.toLowerCase() || "";
