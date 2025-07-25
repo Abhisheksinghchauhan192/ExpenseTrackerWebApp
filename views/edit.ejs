@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Expense</title>
+    <title>Edit Your Expense</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -29,7 +29,7 @@
           <i class="fas fa-check-circle success-icon"></i>
         </div>
         <h3>Success</h3>
-        <p>Message goes here</p>
+        <p id="modal-msg">Message goes here</p>
         <button class="btn-ok" onclick="hideModal()">OK</button>
       </div>
     </div>
@@ -43,23 +43,25 @@
         ><i class="fa-solid fa-right-from-bracket"></i
       ></a>
       <div class="container">
-        <h1>Add Your New Expense</h1>
+        <h1>Edit Your Expense</h1>
 
       </div>
 
-      <form action="/home/add" method="post" class="form container">
+      <form  class="form container">
+        <div class="<%= id %>" id="exp-id"></div>
         <div class="items container">
           <label for="Date">Date:</label>
-          <input type="date" name="Date" id="date-box" required />
+          <input type="date" name="Date" id="date-box"  value="<%= expense.date%>" required />
         </div>
         <div class="items">
           <label for="Amount">Amount</label>
-          <input type="text" class="input-box" name="Amount" required />
+          <input type="text" class="input-box" name="Amount" value='<%= expense.amount %>' id="exp-amount" required />
         </div>
 
         <div class="items container">
           <label for="Category">Category :</label>
-          <select name="Category" id="category" class="selections" required>
+          <select name="Category" id="category" class="selections" required >
+            <option value="<%= expense.cat %>" selected><%= expense.cat %></option>
             <option value="Groceries">Groceries</option>
             <option value="Utilities">Utilities</option>
             <option value="Food">Food</option>
@@ -75,11 +77,12 @@
         </div>
         <div class="items container">
           <label for="Merchant">Merchant</label>
-          <input type="text" class="input-box" name="Merchant" required />
+          <input type="text" class="input-box" name="Merchant" value="<%= expense.merc %>" id="exp-merchant" required />
         </div>
         <div class="items container">
           <label for="paymethod">Payment Method</label>
           <select name="paymentMethod" id="pay" class="selections" required>
+            <option value="<%= expense.method %>" selected><%= expense.method %></option>
             <option value="CASH">CASH</option>
             <option value="UPI">UPI</option>
             <option value="Net Banking">Net Banking</option>
@@ -92,33 +95,15 @@
             id="desc"
             placeholder="Write Description of the Expense. "
             required
-          ></textarea>
+          ><%= expense.desc %></textarea>
         </div>
         <div class="items container">
-          <button>ADD</button>
+          <button id="savebtn">Save</button>
         </div>
       </form>
     </main>
     <%-include("includes/footer.ejs") %>
     <script src="/scripts/model.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        let dateInput = document.getElementById("date-box");
-
-        if (dateInput) {
-          // Check if the element exists
-          let today = new Date();
-          let dd = String(today.getDate()).padStart(2, "0");
-          let mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-          let yyyy = today.getFullYear();
-
-          let maxDate = yyyy + "-" + mm + "-" + dd;
-          dateInput.setAttribute("max", maxDate);
-          dateInput.value = maxDate;
-        }
-
-        // ... your existing form swap and typewriter code ...
-      });
-    </script>
+    <script src="/scripts/editExpense.js"></script>
   </body>
 </html>

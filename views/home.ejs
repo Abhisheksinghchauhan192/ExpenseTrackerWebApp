@@ -4,19 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Personal Expense Tracker</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" href="/css/modelstyle.css" />
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/homeStyle.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/footer.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body class="body">
     <!-- model for messages showing -->
@@ -39,223 +49,255 @@
     <main class="dashboard">
       <div class="history">
         <div class="options">
-          <form action="/home/gettable" method="post" id="table-form">
-            <div class="filter">
-              <a  href="/home/add" id="add-btn">ADD</a>
-              <label for="filter" class="option-lable">Apply Filter</label>
-              <select name="filter" id="filter">
-                <option value="No Filter">No Filter</option>
-                <option value="Filter">Filter</option>
-              </select>
+          <div class="container">
+            <form action="/home/gettable" method="post" id="table-form">
+              <div class="container">
+                <div class="filter">
+                  <a href="/home/add" id="add-btn">ADD</a>
+                  <label for="filter" class="option-lable">Apply Filter</label>
+                  <select name="filter" id="filter">
+                    <option value="No Filter">No Filter</option>
+                    <option value="Filter">Filter</option>
+                  </select>
 
-              <button class="btn">Fetch DB</button>
-            </div>
-            <div class="afterfilter">
-              <div class="selections">
-                <label for="top" class="option-lable">Top:</label>
-                <select name="top" id="top">
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                  <option value="25">25</option>
-                  <option value="30">30</option>
-                  <option value="40">40</option>
-                  <option value="50">50</option>
-                  <option value="60">60</option>
-                  <option value="80">80</option>
-                  <option value="100">100</option>
-                  <option value="All">All</option>
-                </select>
+                  <button class="btn">Fetch DB</button>
+                </div>
+              </div>
+              <div class="container">
+                <div class="afterfilter">
+                  <div class="selections">
+                    <label for="top" class="option-lable">Top:</label>
+                    <select name="top" id="top">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                      <option value="30">30</option>
+                      <option value="40">40</option>
+                      <option value="50">50</option>
+                      <option value="60">60</option>
+                      <option value="80">80</option>
+                      <option value="100">100</option>
+                      <option value="All">All</option>
+                    </select>
+                  </div>
+
+                  <div class="selections">
+                    <label for="orderby" class="option-lable">Order</label>
+                    <select name="orderby" id="orderby">
+                      <option value="asc">Acending</option>
+                      <option value="desc">Decending</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
-              <div class="selections">
-                <label for="orderby" class="option-lable">Order</label>
-                <select name="orderby" id="orderby">
-                  <option value="asc">Acending</option>
-                  <option value="desc">Decending</option>
-                </select>
-              </div>
-            </div>
+              <div class="container">
+                <div class="afterfilter">
+                  <div class="selections">
+                    <label for="monthfilter" class="option-lable">Month </label>
+                    <select
+                      name="monthfilter"
+                      id="monthfilter"
+                      class="selectfilters"
+                    >
+                      <option value="" selected>--Select an option--</option>
+                      <option value="01">January</option>
+                      <option value="02">February</option>
+                      <option value="03">March</option>
+                      <option value="04">April</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">Auguast</option>
+                      <option value="09">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                  </div>
+                  <div class="selections">
+                    <label for="yearfilter" class="option-lable">Year </label>
+                    <select
+                      name="yearfilter"
+                      id="yearfilter"
+                      class="selectfilters"
+                    >
+                      <option value="" selected>--Select an option--</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                    </select>
+                  </div>
 
-            <div class="afterfilter">
-              <div class="selections">
-                <label for="monthfilter" class="option-lable" >Month </label>
-                <select name="monthfilter" id="monthfilter"   class="selectfilters
-                ">
-                  <option value="" selected>--Select an option--</option>
-                  <option value="01">January</option>
-                  <option value="02">February</option>
-                  <option value="03">March</option>
-                  <option value="04">April</option>
-                  <option value="05">May</option>
-                  <option value="06">June</option>
-                  <option value="07">July</option>
-                  <option value="08">Auguast</option>
-                  <option value="09">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
+                  <div class="selections">
+                    <label for="catfilter" class="option-lable"
+                      >Category
+                    </label>
+                    <select
+                      name="catfilter"
+                      id="catfilter"
+                      class="selectfilters"
+                    >
+                      <option value="" selected>--Select an option--</option>
+                      <option value="Groceries">Groceries</option>
+                      <option value="Utilities">Utilities</option>
+                      <option value="Food">Food</option>
+                      <option value="Others">Others</option>
+                      <option value="Book">Book</option>
+                      <option value="Health">Health</option>
+                      <option value="Stationary">Stationary</option>
+                      <option value="Transport">Transport</option>
+                      <option value="Shopping">Shopping</option>
+                      <option value="Gift">Gift</option>
+                      <option value="Housing">Housing</option>
+                    </select>
+                  </div>
+                  <div class="selections">
+                    <label for="PaymentMethodfilter" class="option-lable"
+                      >Method
+                    </label>
+                    <select name="PaymentMethodfilter" id="PaymentMethodfilter">
+                      <option value="" selected>--Select an option--</option>
+                      <option value="CASH">Cash</option>
+                      <option value="UPI">UPI</option>
+                      <option value="Net Banking">Net Banking</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div class="selections">
-                <label for="yearfilter" class="option-lable" >Year </label>
-                <select name="yearfilter" id="yearfilter"  class="selectfilters
-                ">
-                  <option value="" selected>--Select an option--</option>
-                  <option value="2023">2023</option>
-                  <option value="2024">2024</option>
-                  <option value="2025">2025</option>
-                  <option value="2026">2026</option>
-                  <option value="2027">2027</option>
-                </select>
-              </div>
-
-              <div class="selections">
-                <label for="catfilter" class="option-lable">Category </label>
-                <select name="catfilter" id="catfilter" class="selectfilters
-                ">
-
-                  <option value="" selected>--Select an option--</option>
-                  <option value="Groceries">Groceries</option>
-                  <option value="Utilities">Utilities</option>
-                  <option value="Food">Food</option>
-                  <option value="Others">Others</option>
-                  <option value="Book">Book</option>
-                  <option value="Health">Health</option>
-                  <option value="Stationary">Stationary</option>
-                  <option value="Transport">Transport</option>
-                  <option value="Shopping">Shopping</option>
-                  <option value="Gift">Gift</option>
-                  <option value="Housing">Housing</option>
-                </select>
-              </div>
-              <div class="selections">
-                <label for="PaymentMethodfilter" class="option-lable">Method </label>
-                <select name="PaymentMethodfilter" id="PaymentMethodfilter">
-                  <option value="" selected>--Select an option--</option>
-                  <option value="CASH">Cash</option>
-                  <option value="UPI">UPI</option>
-                  <option value="Net Banking">Net Banking</option>
-                </select>
-              </div>
-            </div>
-
-          </form>
+            </form>
+          </div>
         </div>
         <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Merchant</th>
-                <th>PaymentMethod</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-            </tbody>
-          </table>
+          <div class="container">
+            <table>
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Merchant</th>
+                  <th>PaymentMethod</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
         </div>
       </div>
+
       <div class="charts">
         <div id="total-exp">
           <h2>Total: <%=total%></h2>
         </div>
 
         <h3>Category Wise Chart :</h3>
-        <div class="pie-chart">
-          <canvas id="cat-chart"></canvas>
+        <div class="container">
+          <div class="pie-chart">
+            <canvas id="cat-chart"></canvas>
+          </div>
         </div>
+        <div class="container">
+          <div class="monthly">
+            <h3>Monthly Spend :</h3>
+            <div class="container">
+              <form
+                action="/home"
+                method="post"
+                class="selectmonth"
+                id="barchartform"
+              >
+                <label for="month" class="option-lable">Month:</label>
+                <div class="qlabel">
+                  <select name="month" id="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">Auguast</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
 
-        <div class="monthly">
-          <h3>Monthly Spend :</h3>
-          <form action="/home" method="post" class="selectmonth" id="barchartform">
-            <label for="month" class="option-lable">Month:</label>
-            <div class="qlabel">
-              <select name="month" id="month">
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">Auguast</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-              </select>
+                <label for="year" class="option-lable">Year:</label>
+                <div class="qlabel">
+                  <select name="year" id="year">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn">Get</button>
+              </form>
             </div>
-
-            <label for="year" class="option-lable">Year:</label>
-            <div class="qlabel">
-              <select name="year" id="year">
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-              </select>
+            <div class="container">
+              <div class="bar-chart">
+                <h2 id="total-bar"></h2>
+                <canvas id="bar-chart"></canvas>
+              </div>
             </div>
-            <button type="submit" class="btn">Get</button>
-          </form>
-
-          <div class="bar-chart">
-            <h2 id="total-bar"></h1>
-            <canvas id="bar-chart"></canvas>
           </div>
         </div>
       </div>
     </main>
     <section class="insights">
-        <h2 class="red-h2">Total : <%=total%></h2>
-        <div class="last-month">
-          <h2>Top 3 Category Where You Spent This Month</h2>
-          <div class="top3Category">
-            <table class="top3table">
-              <thead>
-                <tr>
-                  <th>Category </th>
-                  <th>Amount Spent</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (let item of top3cat) { %>
-                  <tr>
-                    <td><%=item.name%></td>
-                    <td><%=item.total_spent%></td>
-                  </tr>
-                <% } %>
-              </tbody>
-            </table>
-          </div>
+      <h2 class="red-h2">Total : <%=total%></h2>
+      <div class="last-month">
+        <h2>Top 3 Category Where You Spent This Month</h2>
+        <div class="top3Category">
+          <table class="top3table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Amount Spent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let item of top3cat) { %>
+              <tr>
+                <td><%=item.name%></td>
+                <td><%=item.total_spent%></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <div class="last-month">
-          <h2>Top 3 Merchants Of Current Month</h2>
-          <div class="top3Category">
-            <table class="top3table">
-              <thead>
-                <tr>
-                  <th>Merchant </th>
-                  <th>Amount Spent</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (let item of top3merchant) { %>
-                  <tr>
-                    <td><%=item.name%></td>
-                    <td><%=item.total_spent%></td>
-                  </tr>
-                <% } %>
-              </tbody>
-            </table>
-          </div>
+      <div class="last-month">
+        <h2>Top 3 Merchants Of Current Month</h2>
+        <div class="top3Category">
+          <table class="top3table">
+            <thead>
+              <tr>
+                <th>Merchant</th>
+                <th>Amount Spent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let item of top3merchant) { %>
+              <tr>
+                <td><%=item.name%></td>
+                <td><%=item.total_spent%></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
         </div>
+      </div>
     </section>
 
     <%-include("includes/footer.ejs") %>
@@ -265,6 +307,10 @@
         total: <%- total %>,
         byCategory: <%- JSON.stringify(byCategory) %>
       };
+
+      function printdemo(){
+          console.log("hello dblclicked");
+      } 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/scripts/chartLoader.js"></script>

@@ -10,6 +10,7 @@ const homeRoute = require('./routes/home');
 const monthlyexpenseRoute  = require('./routes/monthlyexpenses');
 const tabledataRoute = require("./routes/tabledata");
 const addRoute = require('./routes/add');
+const editRoute = require('./routes/edit');
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use('/home/getmonthly',monthlyexpenseRoute);
 app.use('/home/gettable',tabledataRoute);
 app.use('/home/add',addRoute);
+app.use('/home/expenses',editRoute);
 app.use("/home",homeRoute);
 app.use("/",authenticateRoute);
 

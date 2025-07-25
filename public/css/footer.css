@@ -9,9 +9,20 @@
     font-weight: 400;
     background-color: rgb(54, 53, 53);
     color:rgb(244, 239, 239);
+    padding: 1rem;
 
 }
+.contact{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+.copyright{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .footer a{
     text-decoration: none;
     color:rgb(244, 239, 239);

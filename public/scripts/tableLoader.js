@@ -64,10 +64,7 @@ function applyFilters() {
   const catValue = selectedCat.value;
   const methodValue = selectedPayment.value;
 
-  console.log("selectedMonth - ", monthValue);
-  console.log("selectedYear - ", yearValue);
-  console.log("selectedcat - ", catValue);
-  console.log("selectedMethod - ", methodValue);
+
 
   const filteredData = tableData.filter((exp) => {
     const expDate = new Date(exp.Date);
@@ -88,9 +85,9 @@ function applyFilters() {
     return include;
   });
 
-  console.log("after filtering the table data", filteredData);
   loadTableData(filteredData);
 }
+
 
 function loadTableData(data) {
   tablebody.innerHTML = "";
@@ -111,7 +108,13 @@ function loadTableData(data) {
       row.insertCell().innerText = rec.Category;
       row.insertCell().innerText = rec.Merchant;
       row.insertCell().innerText = rec.paymentMethod;
-      row.insertCell().innerText = rec.Description;
+      // creating the descriptiono td with editable 
+      const tdesc = document.createElement("td");
+      tdesc.id  = "descEdit";
+      // adding the current Expense id to the classname
+      tdesc.classList.add(`${rec.expenseid}`);
+      tdesc.innerHTML = `<a href="/home/expenses/${rec.expenseid}?date=${rec.Date}&amount=${rec.Amount}&cat=${rec.Category}&merc=${rec.Merchant}&method=${rec.paymentMethod}&desc=${rec.Description}">${rec.Description}</a>`;   
+      row.appendChild(tdesc);
       tablebody.appendChild(row);
     });
 

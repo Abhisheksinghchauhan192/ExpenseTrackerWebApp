@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'updated': 'Username successfully updated!',
         'deleted': 'User successfully deleted!',
         'loggedIn': 'User successfully logged in!',
-        'dataAdded':'Data Successfully Added to the Database'
+        'dataAdded':'Data Successfully Added to the Database',
+        'dataEdited':'Expense Edited Successfully',
     };
     
     const errorMessages = {
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'databaseError':"Try Again Database issue",
         'emailExists':"User Already Exists",
         'unauthorized':"You Are Not Authorised To Access The Resources ",
-        'inputError':'Wrong Inputs Try Again.'
+        'inputError':'Wrong Inputs Try Again.',
     };
     
     if (action) {
