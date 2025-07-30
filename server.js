@@ -11,6 +11,7 @@ const monthlyexpenseRoute  = require('./routes/monthlyexpenses');
 const tabledataRoute = require("./routes/tabledata");
 const addRoute = require('./routes/add');
 const editRoute = require('./routes/edit');
+const exportRoute = require("./routes/exports");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +25,7 @@ app.use('/home/getmonthly',monthlyexpenseRoute);
 app.use('/home/gettable',tabledataRoute);
 app.use('/home/add',addRoute);
 app.use('/home/expenses',editRoute);
+app.use('/home/exports',exportRoute);
 app.use("/home",homeRoute);
 app.use("/",authenticateRoute);
 

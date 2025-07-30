@@ -1,9 +1,45 @@
-<header class="header">
-  <div class="logo ">Expenso <span class="animated-text">My Friend</span></div>
-  <div class="links">
-    <a href="/home">Home</a>
-    <a href="#">Insights.</a>
-    <a href="#">Contact Us</a>
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+  aria-label="Third navbar example"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand logo" href="/home">Expenso <span>My Friend</span></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarsExample03"
+      aria-controls="navbarsExample03"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a class="nav-link active links" aria-current="page" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link links" aria-disabled="true">Contact Us</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle links"
+            href="#"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Export Data</a
+          >
+          <ul class="dropdown-menu  ">
+            <li><a href="#" class=" dropdown-item disabled">Download As</a></li>
+            <li><a class="dropdown-item " href="/home/exports/csv">CSV</a></li>
+            <li><a class="dropdown-item" href="/home/exports/excel">Excel</a></li>
+            <li><a class="dropdown-item" href="/home/exports/pdf">PDF</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="btn-primary logbtn" title="Log out " href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
   </div>
-  <button class="primary-btn" title="Log Out"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a></button>
-</header>
+</nav>
